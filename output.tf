@@ -1,3 +1,3 @@
 output "AWS_VC_id" {
-  value = data.equinix_fabric_connection.connection_data_name.id
+  value = equinix_fabric_connection.vd2aws.id
 }
