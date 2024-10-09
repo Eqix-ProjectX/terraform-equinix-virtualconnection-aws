@@ -58,3 +58,77 @@ variable "seller_region" {
   description = "Seller Region"
   type        = string
 }
+
+############# AWS Variables #################
+
+
+variable "aws_region" {
+  description = "AWS Region"
+  type        = string
+}
+
+variable "aws_access_key" {
+  description = "AWS Access Key"
+  type        = string
+}
+
+
+variable "aws_secret_key" {
+  description = "AWS Secret Key"
+  type        = string
+}
+
+
+variable "aws_vpc_name" {
+  description = "AWS VPC CIDR"
+  type        = string
+}
+
+
+variable "aws_vpc_cidr" {
+  description = "AWS VPC CIDR"
+  type        = string
+}
+
+variable "aws_subnet_name" {
+  description = "AWS Subnet name"
+  type        = string
+}
+
+
+variable "aws_subnet_cidr" {
+  description = "AWS Subnet CIDR"
+  type        = string
+}
+
+variable "aws_vpg_name" {
+  description = "AWS VPG name"
+  type        = string
+}
+
+
+variable "aws_vif_name" {
+  description = "AWS Subnet Availability zone"
+  type        = string
+}
+
+variable "customer_asn" {
+  description = "NE ASN"
+  type        = string
+}
+
+variable "aws_bgp_auth_key" {
+  description = "AWS BGP key"
+  type        = string
+}
+
+variable "amazon_ip_address" {
+  description = "AWS IP"
+  type        = string
+}
+
+variable "customer_ip_address" {
+  description = "Customer NE interface IP"
+  type        = string
+}
+
