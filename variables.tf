@@ -78,6 +78,10 @@ variable "aws_secret_key" {
   type        = string
 }
 
+variable "aws_token" {
+  description = "AWS Token"
+  type        = string
+}
 
 variable "aws_vpc_name" {
   description = "AWS VPC CIDR"
