@@ -14,13 +14,13 @@ terraform {
 }
 
 provider equinix {
-  client_id     = var.equinix_client_id
-  client_secret = var.equinix_client_secret
+  # client_id     = var.equinix_client_id
+  # client_secret = var.equinix_client_secret
 }
 
 provider "aws" {
   region = var.aws_region
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key
-  token = var.aws_token 
+  # access_key = var.aws_access_key
+  # secret_key = var.aws_secret_key
+  # token = var.aws_token 
 }
