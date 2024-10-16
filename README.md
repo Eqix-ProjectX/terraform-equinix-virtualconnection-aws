@@ -36,3 +36,5 @@ customer_ip_address = "192.168.1.1/30"
 >`export EQUINIX_API_CLIENTID=someEquinixAPIClientID`  
 >`export EQUINIX_API_CLIENTSECRET=someEquinixAPIClientSecret`  
 >`export METAL_AUTH_TOKEN=someEquinixMetalToken`
+>
+> AWS access key can be same way. refer https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html?icmpid=docs_sso_user_portal
