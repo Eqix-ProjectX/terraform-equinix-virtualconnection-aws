@@ -99,4 +99,12 @@ resource "aws_dx_private_virtual_interface" "aws_dx_vif" {
   customer_address = var.customer_ip_address
   mtu              = 1500
   vpn_gateway_id   = aws_vpn_gateway.vgw.id
+  lifecycle {
+    ignore_changes = [ 
+      vlan,
+      bgp_asn,
+      customer_address,
+      amazon_address
+     ]
+  }
 } 
