@@ -3,7 +3,7 @@ output "AWS_VC_id" {
 }
 
 output "AWS_DX_id" {
-value = data.aws_dx_connection.dx_connection.id
+  value = data.aws_dx_connection.dx_connection.id
 }
 
 output "AWS_VPG_id" {

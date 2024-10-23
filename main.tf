@@ -3,7 +3,7 @@ resource "random_pet" "this" {
 }
 
 resource "equinix_fabric_connection" "vd2aws" {
-  name = "${var.connection_name}${random_pet.this.id }"
+  name = "${var.connection_name}${random_pet.this.id}"
   type = var.connection_type
   notifications {
     type   = "ALL"
@@ -22,16 +22,16 @@ resource "equinix_fabric_connection" "vd2aws" {
       }
       interface {
         type = "CLOUD"
-        id = var.interface_number
+        id   = var.interface_number
       }
     }
   }
 
-    z_side {
+  z_side {
     access_point {
-      type = "SP"
+      type               = "SP"
       authentication_key = var.authentication_key
-      seller_region = var.seller_region
+      seller_region      = var.seller_region
       profile {
         type = "L2_PROFILE"
         uuid = var.profile_uuid
@@ -44,21 +44,21 @@ resource "equinix_fabric_connection" "vd2aws" {
 }
 
 locals {
-    provider_connection_ids = [
+  provider_connection_ids = [
     for access_point in [
       for z in equinix_fabric_connection.vd2aws.z_side : tolist(z.access_point)[0]
     ] : access_point.provider_connection_id
-  ]  
+  ]
 }
 
 resource "aws_dx_connection_confirmation" "aws_dx_connection_confirm" {
   connection_id = local.provider_connection_ids[0]
-  
+
 }
 
 data "aws_dx_connection" "dx_connection" {
-  depends_on = [ equinix_fabric_connection.vd2aws ]
-  name = "${var.connection_name}${random_pet.this.id }"
+  depends_on = [equinix_fabric_connection.vd2aws]
+  name       = "${var.connection_name}${random_pet.this.id}"
 }
 
 
@@ -70,26 +70,26 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "private" {
-  depends_on = [aws_vpc.main ]
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = var.aws_subnet_cidr
-   tags = {
+  depends_on = [aws_vpc.main]
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.aws_subnet_cidr
+  tags = {
     Name = var.aws_subnet_name
   }
 }
 
 resource "aws_vpn_gateway" "vgw" {
-   depends_on = [aws_subnet.private ]
-  vpc_id = aws_vpc.main.id
-tags = {
+  depends_on = [aws_subnet.private]
+  vpc_id     = aws_vpc.main.id
+  tags = {
     Name = var.aws_vpg_name
   }
-  
+
 }
 
 resource "aws_dx_private_virtual_interface" "aws_dx_vif" {
-  depends_on = [aws_dx_connection_confirmation.aws_dx_connection_confirm ]
-  connection_id    = local.provider_connection_ids[0] 
+  depends_on       = [aws_dx_connection_confirmation.aws_dx_connection_confirm]
+  connection_id    = local.provider_connection_ids[0]
   name             = var.aws_vif_name
   vlan             = data.aws_dx_connection.dx_connection.vlan_id
   address_family   = "ipv4"
@@ -100,11 +100,11 @@ resource "aws_dx_private_virtual_interface" "aws_dx_vif" {
   mtu              = 1500
   vpn_gateway_id   = aws_vpn_gateway.vgw.id
   lifecycle {
-    ignore_changes = [ 
+    ignore_changes = [
       vlan,
       bgp_asn,
       customer_address,
       amazon_address
-     ]
+    ]
   }
-} 
+}
